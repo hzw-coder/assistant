@@ -26,7 +26,7 @@
               <div class="type_item">
                 <div class="title">新增意向客户</div>
                 <div class="num">10</div>
-                <div class="than">
+                <div class="than rise">
                   <span>较昨日</span>
                   <img src="../assets/images/上升@2x.png" alt="" />
                   <span>4</span>
