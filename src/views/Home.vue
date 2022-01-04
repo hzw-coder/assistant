@@ -26,14 +26,29 @@
               <div class="type_item">
                 <div class="title">新增意向客户</div>
                 <div class="num">10</div>
+                <div class="than">
+                  <span>较昨日</span>
+                  <img src="../assets/images/上升@2x.png" alt="" />
+                  <span>4</span>
+                </div>
               </div>
               <div class="type_item">
                 <div class="title">新增凤凰云访客</div>
                 <div class="num">200</div>
+                <div class="than rise">
+                  <span>较昨日</span>
+                  <img src="../assets/images/上升@2x.png" alt="" />
+                  <span>8</span>
+                </div>
               </div>
               <div class="type_item">
                 <div class="title">新增企微未绑定的客户</div>
                 <div class="num">200</div>
+                <div class="than dec">
+                  <span>较昨日</span>
+                  <img src="../assets/images/下降@2x.png" alt="" />
+                  <span>12</span>
+                </div>
               </div>
             </div>
             <div class="add_btn">
@@ -41,7 +56,99 @@
               <span>添加客户</span>
             </div>
           </div>
-          <div class="rank">本月团队排行</div>
+          <!-- 排行 -->
+          <div class="rank">
+            <div class="titleContainer">
+              <div class="title">本月团队排行</div>
+              <div class="currentrank">当前排名第10名</div>
+            </div>
+            <div class="wrapper" ref="wrapper">
+              <ul class="content" ref="content">
+                <li class="rankItem">
+                  <div class="avatar_con">
+                    <img
+                      class="avatar"
+                      src="../assets/images/凤凰云客户访问提醒@2x.png"
+                      alt=""
+                    />
+                    <img
+                      class="rankdetail"
+                      src="../assets/images/冠军@2x.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="username">林走凡</div>
+                  <div class="honnor">获客29个</div>
+                </li>
+                <li class="rankItem">
+                  <div class="avatar_con">
+                    <img
+                      class="avatar"
+                      src="../assets/images/凤凰云客户访问提醒@2x.png"
+                      alt=""
+                    />
+                    <img
+                      class="rankdetail"
+                      src="../assets/images/亚军@2x.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="username">林走凡</div>
+                  <div class="honnor">获客29个</div>
+                </li>
+                <li class="rankItem">
+                  <div class="avatar_con">
+                    <img
+                      class="avatar"
+                      src="../assets/images/凤凰云客户访问提醒@2x.png"
+                      alt=""
+                    />
+                    <img
+                      class="rankdetail"
+                      src="../assets/images/季军@2x.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="username">林走凡</div>
+                  <div class="honnor">获客29个</div>
+                </li>
+                <li class="rankItem">
+                  <div class="avatar_con">
+                    <img
+                      class="avatar"
+                      src="../assets/images/凤凰云客户访问提醒@2x.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="username">林走凡</div>
+                  <div class="honnor">获客29个</div>
+                </li>
+                <li class="rankItem">
+                  <div class="avatar_con">
+                    <img
+                      class="avatar"
+                      src="../assets/images/凤凰云客户访问提醒@2x.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="username">林走凡</div>
+                  <div class="honnor">获客29个</div>
+                </li>
+                <li class="rankItem">
+                  <div class="avatar_con">
+                    <img
+                      class="avatar"
+                      src="../assets/images/凤凰云客户访问提醒@2x.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="username">林走凡</div>
+                  <div class="honnor">获客29个</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- 工具箱 -->
           <div class="tool">
             <div class="title">工具箱</div>
             <div class="tool_container">
@@ -72,10 +179,40 @@
 <script>
 const HeaderTop = () =>
   import(/* webpackChunkName: "headertop" */ "../components/Header/HeaderTop");
+import BScroll from "better-scroll";
 export default {
   name: "Home",
   components: {
     HeaderTop,
+  },
+  methods: {
+    initScroll() {
+      let width = 6 * (1.7 + 0.25);
+      this.$refs.content.style.width = width + "rem";
+      this.$nextTick(() => {
+        if (!this.scroll) {
+          this.scroll = new BScroll(this.$refs.wrapper, {
+            startX: 0,
+            click: true,
+            scrollX: true,
+            scrollY: false,
+            eventPassthrough: "vertical",
+          });
+        } else {
+          this.scroll.refresh();
+        }
+      });
+    },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      let timer = setTimeout(() => {
+        if (timer) {
+          clearTimeout(timer);
+          this.initScroll();
+        }
+      }, 0);
+    });
   },
 };
 </script>
@@ -156,6 +293,24 @@ export default {
                 font-weight: 700;
                 font-size: 0.4rem;
                 margin: 0.25rem 0;
+                display: inline-block;
+              }
+              .than {
+                display: inline-block;
+                margin-left: 0.1rem;
+
+                vertical-align: baseline;
+                img {
+                  height: 0.32rem;
+                  width: 0.32rem;
+                  margin-left: 0.15rem;
+                }
+              }
+              .rise {
+                color: #45d315;
+              }
+              .dec {
+                color: #ff4529;
               }
             }
             .type_item:nth-of-type(even) {
@@ -191,6 +346,60 @@ export default {
         }
         .rank {
           margin: 0.15rem 0;
+          .titleContainer {
+            display: flex;
+            justify-content: space-between;
+            .title {
+              font-weight: 700;
+              font-size: 0.3rem;
+            }
+            .currentrank {
+              font-size: 0.2rem;
+              color: #2d66b3;
+            }
+          }
+          .wrapper {
+            margin-top: 0.15rem;
+            white-space: nowrap;
+            overflow: hidden;
+            .content {
+              text-align: center;
+              .rankItem {
+                width: 1.7rem;
+                display: inline-block;
+                margin-right: 0.25rem;
+                // height: 2.3rem;
+                padding: 0.2rem 0.3rem;
+                background-color: #f7f8f9;
+                border-radius: 0.15rem;
+                .avatar_con {
+                  width: 0.8rem;
+                  height: 0.8rem;
+                  border-radius: 50%;
+                  margin: 0 auto;
+                  position: relative;
+                  .avatar {
+                    width: 100%;
+                    height: 100%;
+                  }
+                  .rankdetail {
+                    position: absolute;
+                    width: 0.35rem;
+                    height: 0.32rem;
+                    top: -0.16rem;
+                    left: 0;
+                  }
+                }
+                .username {
+                  margin: 0.1rem 0;
+                  font-weight: 600;
+                }
+                .honnor {
+                  color: #989797;
+                }
+              }
+            }
+          }
         }
         .tool {
           padding: 0.3rem 0;
