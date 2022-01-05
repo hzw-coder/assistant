@@ -8,8 +8,8 @@
           <img src="../assets/images/右-进入@2x.png" alt="" />
         </div>
         <div class="date">
-          <div class="time">
-            <span>2020-11-11</span>
+          <div @click="showDatePopup" class="time">
+            <span>{{ selectedDate | dateFormat }}</span>
             <img src="../assets/images/下拉-透明@2x.png" alt="" />
           </div>
           <div class="tips">*数据每10分钟更新</div>
@@ -173,6 +173,24 @@
         </div>
       </div>
     </div>
+
+    <van-popup
+      round
+      position="bottom"
+      :style="{ height: '45%' }"
+      v-model="showDate"
+    >
+      <van-datetime-picker
+        v-model="currentDate"
+        type="date"
+        confirm-button-text="确定"
+        :min-date="minDate"
+        :max-date="maxDate"
+        :formatter="formatter"
+        @cancel="showDate = false"
+        @confirm="selectDate"
+      />
+    </van-popup>
   </div>
 </template>
 
@@ -184,6 +202,15 @@ export default {
   name: "Home",
   components: {
     HeaderTop,
+  },
+  data() {
+    return {
+      showDate: false,
+      selectedDate: "2020-11-11",
+      minDate: new Date(1900, 0, 1),
+      maxDate: new Date(2050, 12, 31),
+      currentDate: new Date(2022, 0, 5),
+    };
   },
   methods: {
     initScroll() {
@@ -202,6 +229,34 @@ export default {
           this.scroll.refresh();
         }
       });
+    },
+    // 选择时间
+    selectDate(val) {
+      console.log(val);
+      this.showDate = false;
+      this.selectedDate = val;
+    },
+    showDatePopup() {
+      this.showDate = true;
+    },
+    // 日期过滤
+    formatter(type, val) {
+      if (type == "year") {
+        return val + "年";
+      }
+      if (type == "month") {
+        if (val[0] == "0") {
+          val = val.substr(1);
+        }
+        return val + "月";
+      }
+      if (type == "day") {
+        if (val[0] == "0") {
+          val = val.substr(1);
+        }
+        return val + "日";
+      }
+      return val;
     },
   },
   mounted() {
@@ -430,6 +485,21 @@ export default {
         }
       }
     }
+  }
+  // 样式穿透
+  /deep/.van-picker__toolbar {
+    border-bottom: 0.01rem solid #fafafa;
+    .van-picker__confirm {
+      font-size: 0.35rem;
+      color: #326ab5;
+    }
+    .van-picker__cancel {
+      font-size: 0.35rem;
+    }
+  }
+  /deep/.van-picker__columns {
+    padding: 0 1.5rem;
+    font-weight: 600;
   }
 }
 </style>
