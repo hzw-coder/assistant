@@ -4,7 +4,7 @@
       <div class="header_img">
         <img src="../../assets/images/close@2x.png" alt="" />
       </div>
-      <span class="header_title">客户小助手</span>
+      <span class="header_title">{{ title }}</span>
     </div>
   </div>
 </template>
@@ -13,6 +13,12 @@ export default {
   name: "headertop",
   data() {
     return {};
+  },
+  props: {
+    title: {
+      type: String,
+      default: "客户小助手",
+    },
   },
 };
 </script>

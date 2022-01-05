@@ -2,7 +2,7 @@
   <div id="home">
     <div class="container">
       <div class="top">
-        <HeaderTop></HeaderTop>
+        <HeaderTop title="客户小助手"></HeaderTop>
         <div class="address">
           <span>碧桂园容桂凤凰湾</span>
           <img src="../assets/images/右-进入@2x.png" alt="" />
