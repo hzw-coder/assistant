@@ -17,16 +17,40 @@
             </div>
             <div class="right">
               <img src="../../assets/images/搜索@2x.png" alt="" />
-              请输入关键字
+              <!-- <input type="text" placeholder="请输入关键字" /> -->
+              <van-field v-model="word" clearable placeholder="请输入关键词" />
             </div>
           </div>
         </div>
+      </div>
+      <div class="menu">
+        <van-tabs v-model="indexActive">
+          <van-tab title="潜在客户">
+            <Potential></Potential>
+          </van-tab>
+          <van-tab title="公共客户">
+            <Public></Public>
+          </van-tab>
+          <van-tab title="意向客户">
+            <Intention></Intention>
+          </van-tab>
+          <van-tab title="成交客户">
+            <Deal></Deal>
+          </van-tab>
+        </van-tabs>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+const Deal = () => import(/* webpackChunkName: "Deal" */ "../Deal/Deal");
+const Intention = () =>
+  import(/* webpackChunkName: "Intention" */ "../Intention/Intention");
+const Potential = () =>
+  import(/* webpackChunkName: "Potential" */ "../Potential/Potential");
+const Public = () =>
+  import(/* webpackChunkName: "Public" */ "../Public/Public");
 const HeaderTop = () =>
   import(
     /* webpackChunkName: "headertop" */ "../../components/Header/HeaderTop"
@@ -34,10 +58,17 @@ const HeaderTop = () =>
 export default {
   name: "customer",
   data() {
-    return {};
+    return {
+      indexActive: 0,
+      word: "",
+    };
   },
   components: {
     HeaderTop,
+    Deal,
+    Intention,
+    Potential,
+    Public,
   },
   mounted() {},
 
@@ -66,6 +97,7 @@ export default {
         span {
           font-size: 0.3rem;
           font-weight: 600;
+          color: #535353;
         }
         img {
           margin-left: 0.1rem;
@@ -100,7 +132,7 @@ export default {
             }
           }
           .right {
-            flex: 4;
+            flex: 5;
             align-items: center;
             display: flex;
             margin-left: 0.2rem;
@@ -111,8 +143,34 @@ export default {
               height: 0.25rem;
               margin-right: 0.1rem;
             }
+            /deep/.van-cell {
+              padding: 0;
+              background-color: #f2f2f2;
+              font-size: 0.2rem;
+            }
           }
         }
+      }
+    }
+    .menu {
+      /deep/.van-tabs__wrap {
+        height: 0.88rem;
+      }
+      /deep/.van-tab {
+        .van-tab__text {
+          font-size: 0.34rem;
+          display: block;
+          height: 0.4rem;
+          line-height: 0.4rem;
+        }
+      }
+      /deep/.van-tab--active {
+        font-weight: 550;
+      }
+      /deep/.van-tabs__line {
+        background-color: #4477bc;
+        width: 0.45rem;
+        height: 0.06rem;
       }
     }
   }
