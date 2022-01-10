@@ -191,6 +191,35 @@
         </div>
       </van-list>
     </div>
+
+    <van-popup
+      round
+      position="bottom"
+      :style="{ height: '60%' }"
+      v-model="showPopup"
+      class="popupclass"
+    >
+      <div class="option">
+        <div class="title">添加时间</div>
+        <div class="btnlist">
+          <div class="btnitem">今日</div>
+          <div class="btnitem">近7日</div>
+          <div class="btnitem">近30日</div>
+        </div>
+      </div>
+      <div>选择时间</div>
+      <div class="option">
+        <div class="title">客户来源</div>
+        <van-radio-group v-model="radio" direction="horizontal">
+          <van-radio name="1">单选框 1</van-radio>
+          <van-radio name="2">单选框 2</van-radio>
+        </van-radio-group>
+      </div>
+      <div class="option">
+        <div class="title">手机注册状态</div>
+      </div>
+      <div>重置完成</div>
+    </van-popup>
   </div>
 </template>
 
@@ -202,6 +231,8 @@ export default {
     return {
       loading: false,
       finished: false,
+      showPopup: true,
+      radio: "",
     };
   },
 
@@ -382,6 +413,22 @@ export default {
             border-radius: 0.1rem;
           }
         }
+      }
+    }
+  }
+  .popupclass {
+    padding: 0.45rem 0.25rem;
+    .option {
+      margin: 0.1rem 0;
+      .title {
+        font-size: 0.35rem;
+        font-weight: 700;
+      }
+      .btnlist {
+      }
+      /deep/ .van-icon {
+        // border: none;
+        // width: 0;
       }
     }
   }
