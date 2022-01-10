@@ -201,24 +201,46 @@
     >
       <div class="option">
         <div class="title">添加时间</div>
-        <div class="btnlist">
-          <div class="btnitem">今日</div>
-          <div class="btnitem">近7日</div>
-          <div class="btnitem">近30日</div>
+        <van-radio-group class="isflex" v-model="radio" direction="horizontal">
+          <van-radio name="1">今日</van-radio>
+          <van-radio name="2">近7日</van-radio>
+          <van-radio name="2">近30日</van-radio>
+        </van-radio-group>
+      </div>
+      <div class="selecttime">
+        <div class="time">
+          <div class="startime">开始时间</div>
+          <div class="select">
+            <span>请选择时间</span>
+            <img src="../../assets/images/下@2x.png" alt="" />
+          </div>
+        </div>
+        <div class="time">
+          <div class="endtime">结束时间</div>
+          <div class="select">
+            <span>请选择时间</span>
+            <img src="../../assets/images/下@2x.png" alt="" />
+          </div>
         </div>
       </div>
-      <div>选择时间</div>
       <div class="option">
         <div class="title">客户来源</div>
         <van-radio-group v-model="radio" direction="horizontal">
-          <van-radio name="1">单选框 1</van-radio>
-          <van-radio name="2">单选框 2</van-radio>
+          <van-radio name="1">凤凰云访客</van-radio>
+          <van-radio name="2">企业微信好友</van-radio>
         </van-radio-group>
       </div>
       <div class="option">
         <div class="title">手机注册状态</div>
+        <van-radio-group v-model="radio" direction="horizontal">
+          <van-radio name="1">有手机号</van-radio>
+          <van-radio name="2">无手机号</van-radio>
+        </van-radio-group>
       </div>
-      <div>重置完成</div>
+      <div class="twobtn">
+        <div class="reset">重置</div>
+        <div class="complete">完成</div>
+      </div>
     </van-popup>
   </div>
 </template>
@@ -419,16 +441,80 @@ export default {
   .popupclass {
     padding: 0.45rem 0.25rem;
     .option {
-      margin: 0.1rem 0;
+      margin-bottom: 0.4rem;
       .title {
         font-size: 0.35rem;
         font-weight: 700;
       }
-      .btnlist {
+      .isflex {
+        display: flex;
+        justify-content: space-between;
+        /deep/ .van-radio__label {
+          padding: 0.18rem 0.65rem;
+        }
+      }
+      /deep/ .van-radio-group {
+        margin: 0.15rem 0;
+      }
+      /deep/ .van-radio {
+        // flex: 33.33%;
+        // box-sizing: border-box;
       }
       /deep/ .van-icon {
-        // border: none;
-        // width: 0;
+        border: none;
+        width: 0;
+      }
+      /deep/ .van-radio__label {
+        margin-left: 0;
+        display: inline-block;
+        background-color: #f5f5f5;
+        border-radius: 0.08rem;
+        color: #4b4b4b;
+        font-size: 0.3rem;
+        box-sizing: border-box;
+        padding: 0.15rem 0.3rem;
+      }
+      /deep/ .van-radio__icon {
+        .van-icon-success:before {
+          content: "";
+        }
+      }
+    }
+    .twobtn {
+      display: flex;
+      justify-content: space-between;
+      div {
+        width: 3.3rem;
+        text-align: center;
+        line-height: 0.9rem;
+        height: 0.9rem;
+        border: 0.01rem solid #4477bc;
+        border-radius: 0.1rem;
+        font-size: 0.3rem;
+      }
+      .reset {
+        color: #4477bc;
+      }
+      .complete {
+        color: #fff;
+        background-color: #4477bc;
+      }
+    }
+    .selecttime {
+      .time {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.2rem;
+        font-size: 0.3rem;
+        color: #454545;
+        .select {
+          color: #959595;
+          img {
+            width: 0.24rem;
+            height: 0.24rem;
+            margin-left: 0.1rem;
+          }
+        }
       }
     }
   }
