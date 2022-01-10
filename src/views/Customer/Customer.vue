@@ -4,6 +4,7 @@
       <div class="top">
         <HeaderTop title="我的客户"></HeaderTop>
       </div>
+      <div v-if="isAuthorization" class="toast">该用户还没授权手机号</div>
       <div class="search">
         <div class="address">
           <span>碧桂园容桂凤凰湾</span>
@@ -61,6 +62,7 @@ export default {
     return {
       indexActive: 0,
       word: "",
+      isAuthorization: false, //是否授权手机号
     };
   },
   components: {
@@ -82,6 +84,14 @@ export default {
     .top {
       padding: 0 0.25rem;
       background-color: #4477bc;
+    }
+    // toast是否授权
+    .toast {
+      background-color: #eff3f9;
+      padding: 0 0.25rem;
+      font-size: 0.25rem;
+      height: 0.9rem;
+      line-height: 0.9rem;
     }
     .search {
       padding: 0 0.25rem;
