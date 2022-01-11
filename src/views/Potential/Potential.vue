@@ -204,24 +204,26 @@
         <van-radio-group class="isflex" v-model="radio" direction="horizontal">
           <van-radio name="1">今日</van-radio>
           <van-radio name="2">近7日</van-radio>
-          <van-radio name="2">近30日</van-radio>
+          <van-radio name="3">近30日</van-radio>
         </van-radio-group>
       </div>
       <div class="selecttime">
-        <div class="time">
-          <div class="startime">开始时间</div>
-          <div class="select">
-            <span>请选择时间</span>
-            <img src="../../assets/images/下@2x.png" alt="" />
-          </div>
-        </div>
-        <div class="time">
-          <div class="endtime">结束时间</div>
-          <div class="select">
-            <span>请选择时间</span>
-            <img src="../../assets/images/下@2x.png" alt="" />
-          </div>
-        </div>
+        <van-collapse v-model="activeName" accordion>
+          <van-collapse-item name="starttime">
+            <template #title>
+              <div>开始时间</div>
+              <div>1994-09-12</div>
+            </template>
+            内容
+          </van-collapse-item>
+          <van-collapse-item name="endtime">
+            <template #title>
+              <div>结束时间</div>
+              <div>1995-01-01</div>
+            </template>
+            内容
+          </van-collapse-item>
+        </van-collapse>
       </div>
       <div class="option">
         <div class="title">客户来源</div>
@@ -255,6 +257,7 @@ export default {
       finished: false,
       showPopup: true,
       radio: "",
+      activeName: "",
     };
   },
 
@@ -438,8 +441,14 @@ export default {
       }
     }
   }
+  //遮罩层
+  /deep/.van-overlay {
+    top: 0.8rem;
+  }
+
   .popupclass {
     padding: 0.45rem 0.25rem;
+    padding-bottom: 0;
     .option {
       margin-bottom: 0.4rem;
       .title {
@@ -480,9 +489,15 @@ export default {
         }
       }
     }
+    // 按钮
     .twobtn {
       display: flex;
       justify-content: space-between;
+      position: sticky;
+      bottom: 0rem;
+      align-items: center;
+      height: 1.2rem;
+      background-color: #fff;
       div {
         width: 3.3rem;
         text-align: center;
@@ -500,19 +515,38 @@ export default {
         background-color: #4477bc;
       }
     }
+    // 选择时间
     .selecttime {
-      .time {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 0.2rem;
-        font-size: 0.3rem;
-        color: #454545;
-        .select {
-          color: #959595;
-          img {
-            width: 0.24rem;
-            height: 0.24rem;
-            margin-left: 0.1rem;
+      /deep/ .van-hairline--top-bottom {
+        position: static;
+      }
+      /deep/ .van-hairline--top-bottom::after {
+        border: none;
+      }
+      /deep/ .van-collapse {
+        .van-collapse-item {
+          position: static;
+          .van-cell {
+            position: static;
+            padding: 0;
+            .van-cell__title {
+              font-size: 0.25rem;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              height: 0.5rem;
+            }
+            .van-icon {
+              width: 0.4rem;
+              height: 0.5rem;
+              font-size: 0.25rem;
+              line-height: 0.5rem;
+            }
+          }
+          .van-cell::after {
+            border: none;
+            position: static;
+            content: "";
           }
         }
       }
