@@ -199,49 +199,59 @@
       v-model="showPopup"
       class="popupclass"
     >
-      <div class="option">
-        <div class="title">添加时间</div>
-        <van-radio-group class="isflex" v-model="radio" direction="horizontal">
-          <van-radio name="1">今日</van-radio>
-          <van-radio name="2">近7日</van-radio>
-          <van-radio name="3">近30日</van-radio>
-        </van-radio-group>
-      </div>
-      <div class="selecttime">
-        <van-collapse v-model="activeName" accordion>
-          <van-collapse-item name="starttime">
-            <template #title>
-              <div>开始时间</div>
-              <div>1994-09-12</div>
-            </template>
-            内容
-          </van-collapse-item>
-          <van-collapse-item name="endtime">
-            <template #title>
-              <div>结束时间</div>
-              <div>1995-01-01</div>
-            </template>
-            内容
-          </van-collapse-item>
-        </van-collapse>
-      </div>
-      <div class="option">
-        <div class="title">客户来源</div>
-        <van-radio-group v-model="radio" direction="horizontal">
-          <van-radio name="1">凤凰云访客</van-radio>
-          <van-radio name="2">企业微信好友</van-radio>
-        </van-radio-group>
-      </div>
-      <div class="option">
-        <div class="title">手机注册状态</div>
-        <van-radio-group v-model="radio" direction="horizontal">
-          <van-radio name="1">有手机号</van-radio>
-          <van-radio name="2">无手机号</van-radio>
-        </van-radio-group>
-      </div>
-      <div class="twobtn">
-        <div class="reset">重置</div>
-        <div class="complete">完成</div>
+      <div class="popupContainer">
+        <div class="option">
+          <div class="title">添加时间</div>
+          <van-radio-group
+            class="isflex"
+            v-model="radio"
+            direction="horizontal"
+          >
+            <van-radio name="1">今日</van-radio>
+            <van-radio name="2">近7日</van-radio>
+            <van-radio name="3">近30日</van-radio>
+          </van-radio-group>
+        </div>
+
+        <div class="selecttime">
+          <van-collapse v-model="activeName" accordion>
+            <van-collapse-item name="starttime">
+              <template #title>
+                <div>开始时间</div>
+                <div>1994-09-12</div>
+              </template>
+              内容
+            </van-collapse-item>
+            <van-collapse-item name="endtime">
+              <template #title>
+                <div>结束时间</div>
+                <div>1995-01-01</div>
+              </template>
+              内容
+            </van-collapse-item>
+          </van-collapse>
+        </div>
+
+        <div class="option">
+          <div class="title">客户来源</div>
+          <van-radio-group v-model="radio" direction="horizontal">
+            <van-radio name="1">凤凰云访客</van-radio>
+            <van-radio name="2">企业微信好友</van-radio>
+          </van-radio-group>
+        </div>
+        <div class="option">
+          <div class="title">手机注册状态</div>
+          <van-radio-group v-model="radio" direction="horizontal">
+            <van-radio name="1">有手机号</van-radio>
+            <van-radio name="2">无手机号</van-radio>
+          </van-radio-group>
+        </div>
+        <div class="twobtn">
+          <div class="btnContainer">
+            <div class="reset">重置</div>
+            <div class="complete">完成</div>
+          </div>
+        </div>
       </div>
     </van-popup>
   </div>
@@ -449,6 +459,18 @@ export default {
   .popupclass {
     padding: 0.45rem 0.25rem;
     padding-bottom: 0;
+    .popupContainer {
+      position: relative;
+      height: 100%;
+      width: 100%;
+    }
+    // 伪元素解决按钮遮挡
+    .popupContainer::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1.5rem;
+    }
     .option {
       margin-bottom: 0.4rem;
       .title {
@@ -491,28 +513,36 @@ export default {
     }
     // 按钮
     .twobtn {
-      display: flex;
-      justify-content: space-between;
-      position: sticky;
-      bottom: 0rem;
-      align-items: center;
-      height: 1.2rem;
+      bottom: 0;
+      left: 0;
+      padding: 0 0.25rem;
+      position: fixed;
+      height: 1.5rem;
+      line-height: 1.5rem;
+      width: 100%;
       background-color: #fff;
-      div {
-        width: 3.3rem;
-        text-align: center;
-        line-height: 0.9rem;
-        height: 0.9rem;
-        border: 0.01rem solid #4477bc;
-        border-radius: 0.1rem;
-        font-size: 0.3rem;
-      }
-      .reset {
-        color: #4477bc;
-      }
-      .complete {
-        color: #fff;
-        background-color: #4477bc;
+      .btnContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        div {
+          width: 3.3rem;
+          text-align: center;
+          line-height: 0.9rem;
+          height: 0.9rem;
+          border: 0.01rem solid #4477bc;
+          border-radius: 0.1rem;
+          font-size: 0.3rem;
+        }
+        .reset {
+          color: #4477bc;
+        }
+        .complete {
+          color: #fff;
+          background-color: #4477bc;
+        }
       }
     }
     // 选择时间
@@ -529,6 +559,8 @@ export default {
           .van-cell {
             position: static;
             padding: 0;
+            display: flex;
+            align-items: center;
             .van-cell__title {
               font-size: 0.25rem;
               display: flex;
@@ -550,6 +582,7 @@ export default {
           }
         }
       }
+      //滚动时间
     }
   }
 }
