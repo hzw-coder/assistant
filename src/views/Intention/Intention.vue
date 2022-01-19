@@ -207,25 +207,41 @@
           >
             <van-radio name="1">今日</van-radio>
             <van-radio name="2">近7日</van-radio>
-            <van-radio name="3">近30日</van-radio>
+            <van-radio class="isChecked" name="3">近30日</van-radio>
           </van-radio-group>
         </div>
 
         <div class="selecttime">
           <van-collapse v-model="activeName" accordion>
-            <van-collapse-item name="starttime">
+            <van-collapse-item ref="startRef" name="starttime">
               <template #title>
                 <div>开始时间</div>
-                <div>请选择时间</div>
+                <div>{{ startdate | dateFormat }}</div>
               </template>
-              内容
+              <van-datetime-picker
+                v-model="currentDate"
+                type="date"
+                :min-date="minDate"
+                :max-date="maxDate"
+                @confirm="startConfirm"
+                @cancel="startCancel"
+                :formatter="formatter"
+              />
             </van-collapse-item>
-            <van-collapse-item name="endtime">
+            <van-collapse-item ref="endRef" name="endtime">
               <template #title>
                 <div>结束时间</div>
-                <div>请选择时间</div>
+                <div>{{ enddate | dateFormat }}</div>
               </template>
-              内容
+              <van-datetime-picker
+                v-model="currentDate"
+                type="date"
+                :min-date="minDate"
+                :max-date="maxDate"
+                @confirm="endConfirm"
+                @cancel="endCancel"
+                :formatter="formatter"
+              />
             </van-collapse-item>
           </van-collapse>
         </div>
@@ -296,6 +312,11 @@ export default {
       showPopup: true,
       radio: "",
       activeName: "",
+      minDate: new Date(2020, 0, 1),
+      maxDate: new Date(2025, 10, 1),
+      currentDate: new Date(2021, 0, 17),
+      startdate: "请选择时间",
+      enddate: "请选择时间",
     };
   },
 
@@ -309,6 +330,45 @@ export default {
     onLoad() {
       this.loading = false;
       console.log("onLoad");
+    },
+    // 确认日期
+    startConfirm(value) {
+      console.log(value);
+      this.startdate = value;
+      this.$refs.startRef.toggle(false);
+    },
+    endConfirm(value) {
+      console.log(value);
+      this.enddate = value;
+      this.$refs.endRef.toggle(false);
+    },
+    // 取消日期
+    startCancel() {
+      this.startdate = "请选择时间";
+      this.$refs.startRef.toggle(false);
+    },
+    endCancel() {
+      this.enddate = "请选择时间";
+      this.$refs.endRef.toggle(false);
+    },
+    // 日期格式化
+    formatter(type, val) {
+      if (type == "year") {
+        return val + "年";
+      }
+      if (type == "month") {
+        if (val[0] == "0") {
+          val = val.substr(1);
+        }
+        return val + "月";
+      }
+      if (type == "day") {
+        if (val[0] == "0") {
+          val = val.substr(1);
+        }
+        return val + "日";
+      }
+      return val;
     },
   },
 };
@@ -552,7 +612,13 @@ export default {
       /deep/ .van-radio-group {
         margin: 0.15rem 0;
       }
-
+      // 设置选中样式
+      /deep/ .van-radio.isChecked {
+        .van-radio__label {
+          background-color: #4477bc;
+          color: #fff;
+        }
+      }
       /deep/ .van-icon {
         border: none;
         width: 0;
@@ -581,6 +647,7 @@ export default {
       position: fixed;
       height: 1.5rem;
       line-height: 1.5rem;
+      z-index: 5;
       width: 100%;
       background-color: #fff;
       .btnContainer {
@@ -643,8 +710,17 @@ export default {
             content: "";
           }
         }
+        // 去除默认边框
+        .van-collapse-item--border::after {
+          border: none;
+        }
       }
       //滚动时间
+      .van-collapse-item__wrapper {
+        .van-collapse-item__content {
+          padding: 0 1rem;
+        }
+      }
     }
   }
 }
