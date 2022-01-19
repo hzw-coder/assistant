@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 const Home = () => import( /* webpackChunkName: "Home" */ '../views/Home.vue')
 const Customer = () => import( /* webpackChunkName: "Customer" */ '../views/Customer/Customer.vue')
+const AddCustomer = () => import( /* webpackChunkName: "Addcustomer" */ '../views/AddCustomer/AddCustomer.vue')
+const SelectPotential = () => import( /* webpackChunkName: "Selectpotential" */ '../views/SelectPotential/SelectPotential.vue')
 
 Vue.use(VueRouter)
 
@@ -14,6 +16,16 @@ const routes = [{
     path: '/customer',
     name: 'Customer',
     component: Customer
+  },
+  {
+    path: '/addcustomer',
+    name: 'AddCustomer',
+    component: AddCustomer
+  },
+  {
+    path: '/selectpotential',
+    name: 'SelectPotential',
+    component: SelectPotential
   }
   // {
   //   path: '/about',
