@@ -98,6 +98,8 @@ export default {
           .van-cell {
             color: #a8a8a8;
             font-size: 0.3rem;
+            display: flex;
+            align-items: center;
             // 搜索图标
             .van-field__left-icon {
               margin-right: 0.08rem;
