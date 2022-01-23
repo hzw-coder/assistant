@@ -4,6 +4,8 @@ const Home = () => import( /* webpackChunkName: "Home" */ '../views/Home.vue')
 const Customer = () => import( /* webpackChunkName: "Customer" */ '../views/Customer/Customer.vue')
 const AddCustomer = () => import( /* webpackChunkName: "Addcustomer" */ '../views/AddCustomer/AddCustomer.vue')
 const SelectPotential = () => import( /* webpackChunkName: "Selectpotential" */ '../views/SelectPotential/SelectPotential.vue')
+const Transfer = () => import( /* webpackChunkName: "Transfer" */ '../views/Transfer/Transfer.vue')
+const Distribution = () => import( /* webpackChunkName: "Distribution" */ '../views/Distribution/Distribution.vue')
 
 Vue.use(VueRouter)
 
@@ -26,6 +28,16 @@ const routes = [{
     path: '/selectpotential',
     name: 'SelectPotential',
     component: SelectPotential
+  },
+  {
+    path: '/transfer',
+    name: 'Transfer',
+    component: Transfer
+  },
+  {
+    path: '/distribution',
+    name: 'Distribution',
+    component: Distribution
   }
   // {
   //   path: '/about',
