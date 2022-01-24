@@ -70,32 +70,44 @@
             :immediate-check="false"
           >
             <div class="searchItem">
-              <div class="name">选项一</div>
-              <div class="right">
+              <div class="name">
+                <div class="option">选项一</div>
                 <div class="isQuit">已离职</div>
-                <img src="../../assets/images/check@2x.png" alt="" />
               </div>
+              <img src="../../assets/images/check@2x.png" alt="" />
             </div>
             <div class="searchItem">
-              <div class="name">选项二</div>
-              <div class="right">
-                <div class="isQuit">已离职</div>
-                <img src="../../assets/images/check@2x.png" alt="" />
+              <div class="name">
+                <div class="option">选项二</div>
+                <div v-show="false" class="isQuit">已离职</div>
               </div>
+              <img
+                v-show="false"
+                src="../../assets/images/check@2x.png"
+                alt=""
+              />
             </div>
             <div class="searchItem">
-              <div class="name">选项三</div>
-              <div class="right">
-                <div class="isQuit">已离职</div>
-                <img src="../../assets/images/check@2x.png" alt="" />
+              <div class="name">
+                <div class="option">选项三</div>
+                <div v-show="false" class="isQuit">已离职</div>
               </div>
+              <img
+                v-show="false"
+                src="../../assets/images/check@2x.png"
+                alt=""
+              />
             </div>
             <div class="searchItem">
-              <div class="name">选项四</div>
-              <div class="right">
-                <div class="isQuit">已离职</div>
-                <img src="../../assets/images/check@2x.png" alt="" />
+              <div class="name">
+                <div class="option">选项四</div>
+                <div v-show="false" class="isQuit">已离职</div>
               </div>
+              <img
+                v-show="false"
+                src="../../assets/images/check@2x.png"
+                alt=""
+              />
             </div>
           </van-list>
         </div>
@@ -315,31 +327,28 @@ export default {
           display: flex;
           align-items: center;
           height: 1.3rem;
+          justify-content: space-between;
           .name {
-            width: 1rem;
-            height: 100%;
-            line-height: 1.3rem;
-            font-size: 0.3rem;
-            margin-right: 0.2rem;
-          }
-          .right {
-            width: calc(100vw - 1.6rem);
-            height: 100%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            .option {
+              width: 1rem;
+              height: 100%;
+              line-height: 1.3rem;
+              font-size: 0.3rem;
+              margin-right: 0.2rem;
+            }
             .isQuit {
-              font-size: 0.28rem;
-              box-sizing: border-box;
+              font-size: 0.25rem;
+              border: 0.01rem solid #929292;
+              color: #929292;
               padding: 0.05rem 0.15rem;
-              color: #969696;
-              border: 0.01rem solid #969696;
               border-radius: 0.1rem;
             }
-            img {
-              width: 0.32rem;
-              height: 0.32rem;
-            }
+          }
+          img {
+            width: 0.32rem;
+            height: 0.32rem;
           }
         }
       }
