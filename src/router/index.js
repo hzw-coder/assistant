@@ -6,6 +6,7 @@ const AddCustomer = () => import( /* webpackChunkName: "Addcustomer" */ '../view
 const SelectPotential = () => import( /* webpackChunkName: "Selectpotential" */ '../views/SelectPotential/SelectPotential.vue')
 const Transfer = () => import( /* webpackChunkName: "Transfer" */ '../views/Transfer/Transfer.vue')
 const Distribution = () => import( /* webpackChunkName: "Distribution" */ '../views/Distribution/Distribution.vue')
+const Default = () => import( /* webpackChunkName: "Default" */ '../views/Default/Default.vue')
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,11 @@ const routes = [{
     path: '/distribution',
     name: 'Distribution',
     component: Distribution
+  },
+  {
+    path: '/default',
+    name: "Default",
+    component: Default
   }
   // {
   //   path: '/about',
