@@ -328,6 +328,7 @@ export default {
           align-items: center;
           height: 1.3rem;
           justify-content: space-between;
+          border-bottom: 0.01rem solid #ebebeb;
           .name {
             display: flex;
             align-items: center;
