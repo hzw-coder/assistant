@@ -7,6 +7,7 @@ const SelectPotential = () => import( /* webpackChunkName: "Selectpotential" */ 
 const Transfer = () => import( /* webpackChunkName: "Transfer" */ '../views/Transfer/Transfer.vue')
 const Distribution = () => import( /* webpackChunkName: "Distribution" */ '../views/Distribution/Distribution.vue')
 const Default = () => import( /* webpackChunkName: "Default" */ '../views/Default/Default.vue')
+const Trajectory = () => import( /* webpackChunkName: "Trajectory" */ '../views/Trajectory/Trajectory.vue')
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,11 @@ const routes = [{
     path: '/default',
     name: "Default",
     component: Default
+  },
+  {
+    path: '/trajectory',
+    name: 'Trajectory',
+    component: Trajectory
   }
   // {
   //   path: '/about',
