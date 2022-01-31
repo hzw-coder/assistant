@@ -21,7 +21,7 @@
                     <span>暂无</span>
                   </div>
                 </div>
-                <div class="right">
+                <div @click="showCustomer = true" class="right">
                   <span>客户信息</span>
                   <img src="../../assets/images/进入-右-灰@2x.png" alt="" />
                 </div>
@@ -127,6 +127,53 @@
           <span>拨打电话</span>
         </div>
       </div>
+      <!-- 复制到楼盘弹窗 -->
+      <van-dialog v-model="showDialog" :show-confirm-button="false">
+        <div class="copy">
+          <div class="copypro">
+            <div class="name">A项目</div>
+            <div class="imgcon">
+              <img src="../../assets/images/img@2x.png" alt="" />
+            </div>
+          </div>
+          <div class="copyright">
+            <div class="text">复制</div>
+            <img src="../../assets/images/右箭头@2x.png" alt="" />
+          </div>
+          <div class="copypro">
+            <div class="name">B项目</div>
+            <div class="imgcon">
+              <img src="../../assets/images/img@2x.png" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="shuoming">
+          <div class="wen">
+            此功能会把当前项目选定的客户复制并录入到目标项目的意向客户列表中，复制后目标项目中
+            客户推介来源统一为“企业微信”。
+          </div>
+          <div class="wen">
+            适用于跟进客户时，发现对其他楼盘有意向，进行一键快速报备。
+          </div>
+          <div class="tishi">
+            <van-checkbox v-model="checked" shape="square"
+              >不再提示</van-checkbox
+            >
+          </div>
+          <div class="btn">
+            <div @click="showDialog = false" class="cancel">取消</div>
+            <div class="continue">继续复制</div>
+          </div>
+        </div>
+      </van-dialog>
+
+      <!-- 客户详情 -->
+      <van-action-sheet
+        v-model="showCustomer"
+        :actions="actions"
+        cancel-text="取消"
+        close-on-click-action
+      />
     </div>
   </div>
 </template>
@@ -144,6 +191,18 @@ export default {
   data() {
     return {
       activeName: "a",
+      showDialog: true,
+      // 不再提示
+      checked: true,
+      // 客户详情
+      showCustomer: false,
+      actions: [
+        { name: "修改资料" },
+        { name: "检测手机号" },
+        { name: "标记为失败" },
+        { name: "复制客户其他楼盘" },
+        { name: "新增跟进日志" },
+      ],
     };
   },
   methods: {},
@@ -425,6 +484,99 @@ export default {
     display: block;
     width: 100%;
     height: 1.2rem;
+  }
+  // 复制楼盘弹窗
+  /deep/.van-dialog {
+    box-sizing: border-box;
+    padding: 0.65rem 0.45rem;
+    width: 6.4rem;
+    .copy {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
+      .copypro {
+        .name {
+          margin-bottom: 0.1rem;
+          font-size: 0.3rem;
+        }
+        .imgcon {
+          width: 2.2rem;
+          height: 3.1rem;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      .copyright {
+        .text {
+          font-size: 0.3rem;
+          text-align: center;
+          color: #4d4d4d;
+        }
+        img {
+          width: 0.64rem;
+          height: 0.27rem;
+        }
+      }
+    }
+    .shuoming {
+      .wen {
+        color: #454545;
+        font-size: 0.28rem;
+      }
+      .tishi {
+        margin: 0.3rem 0;
+        text-align: right;
+        width: 100%;
+        .van-checkbox {
+          justify-content: flex-end;
+          .van-checkbox__icon {
+            font-size: 0.28rem;
+          }
+          .van-checkbox__label {
+            font-size: 0.28rem;
+            color: #959595;
+          }
+        }
+      }
+    }
+    .btn {
+      display: flex;
+      div {
+        text-align: center;
+        flex: 50%;
+        height: 0.9rem;
+        line-height: 0.9rem;
+        border-radius: 0.1rem;
+        font-size: 0.3rem;
+      }
+      .cancel {
+        border: 0.01rem solid #4477bc;
+        background-color: #fff;
+        color: #4477bc;
+        margin-right: 0.2rem;
+      }
+      .continue {
+        color: #fff;
+        background-color: #4477bc;
+      }
+    }
+  }
+
+  // 客户详情
+  /deep/.van-action-sheet__content {
+    .van-action-sheet__item {
+      border-bottom: 0.01rem solid #edecec;
+      .van-action-sheet__name {
+        font-size: 0.3rem;
+      }
+    }
+  }
+  /deep/.van-action-sheet__cancel {
+    font-size: 0.3rem;
+    color: #000;
   }
 }
 </style>
